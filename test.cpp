@@ -12,14 +12,48 @@ using namespace std;
 struct Point {
     float x, y;
 };
-Point BezierToDat(Point a, BezierPoint chromosome[2][6]){
-    for(float t = 0;t<1.0f;t+= 0.01f){
-        float t1 = pow(1,5)*(chromosome[0][5]-(5*bp[4])+(10*bp))
-        a.x = ((1.0-t)^5);
-        a.y = 
-    };
+float getBezier(double t, float p0, float p1, float p2, float p3, float p4, float p5) {
+    float invT = 1.0f - t;
+    
+    return  1 * powf(invT, 5) * p0 +
+            5 * powf(invT, 4) * t * p1 +
+            10 * powf(invT, 3) * powf(t, 2) * p2 +
+            10 * powf(invT, 2) * powf(t, 3) * p3 +
+            5 * invT * powf(t, 4) * p4 +
+            1 * powf(t, 5) * p5;
+}
+
+std::vector<Point> BezierToDat(BezierPoint chromosome[2][6], int numofPoints){
+    std::vector<Point> coords;
+
+    for(int i = 0  ; i<2; i++){
+        int start, end, step;
+        if (i == 0) {
+            start = numofPoints;
+            end = 0;
+            step = -1;
+        } else {
+            start = 1;
+            end = numofPoints;
+            step = 1;
+}
+            for (int p = start; (step > 0) ? (p <= end) : (p >= end); p += step) {
+                double t = double(p) / numofPoints;
+                Point a;
+                a.x = getBezier(t, 0 , chromosome[i][1].x, chromosome[i][2].x, 
+                    chromosome[i][3].x, chromosome[i][4].x, 1);
+                a.y = getBezier(t, chromosome[i][0].y , chromosome[i][1].y, 
+                    chromosome[i][2].y, chromosome[i][3].y, chromosome[i][4].y, 
+                    chromosome[i][5].y);
+                coords.push_back(a);
+            }
+        return coords;
+    }
 };
-void Bezier
+
+void PointsToFile (std::vector<Point> Points){
+    
+};
 
 int main(){
 
