@@ -4,64 +4,53 @@
 #include <string>
 #include <sstream>
 #include <cstdio>
+#include <vector>
+#include "GA.h"
 
 using namespace std;
 
-double getCord( double x , double t){
-    double y = 5*t * ((0.2969*sqrt(x))-(0.1260*x)-(0.3516*(x*x))+(0.2843*(x*x*x))-(0.1015*(x*x*x*x)));
-    return y;
-} 
+struct Point {
+    float x, y;
+};
+Point BezierToDat(Point a, BezierPoint chromosome[2][6]){
+    for(float t = 0;t<1.0f;t+= 0.01f){
+        float t1 = pow(1,5)*(chromosome[0][5]-(5*bp[4])+(10*bp))
+        a.x = ((1.0-t)^5);
+        a.y = 
+    };
+};
+void Bezier
 
 int main(){
 
-
     string input;
+    string outputfilename = "polarTEST3.txt";
     cout<<"what airfoil would you like to test? (input naca number)"<<endl;
     cin>>input;
     ofstream outfile("input.txt");
     outfile <<"NACA "<<input <<endl;
+    outfile <<"PANE" <<endl;
     outfile << "OPER" <<endl;
     outfile << "VISC 500000" <<endl;
     outfile << "PACC" <<endl;
-    outfile << "polarTEST.txt" <<endl;
+    outfile << outputfilename <<endl;
     outfile << "\n";
-    outfile << "ALFA 5" <<endl;
+    outfile << "ASEQ -5 15 1" << endl;
+    outfile << "\n";
     outfile << "QUIT" <<endl;
 
     outfile.close();
 
    system("C:\\Users\\alehu\\XFOIL\\xfoil.exe < input.txt");
-   ifstream outputFile("polarTEST.txt");
+   ifstream outputFile(outputfilename);
    if (!outputFile.is_open()){
     cerr <<"ERROR OPENING FILE" << endl;
    }
-   string line;
-   int linenum;
-   double alpha, cl, cd, cdp, cm, top_xtr, bot_xtr;
-   while (getline(outputFile, line)){
-        if (linenum == 13){
-            istringstream iss(line);
-            iss >> alpha >> cl >> cd >> cdp >> cm >> top_xtr >> bot_xtr;
-
-        }
-        linenum++;
-   }
-
-   int result = remove("C:\\Users\\alehu\\Desktop\\AirfoilOptimizer\\polarTEST.txt");
-   if (result == 0 ) {
+ 
+   int result = remove("polarTEST2.txt");
+   if (result == 0 ) {  
     cout <<"File deleted sucessfully.\n";
    } else {
     cout << "Failed to delete file.\n";
    }
-
-   cout<<"----------------------------------"<<endl;
-   cout<<"AIRFOIL DEBUG"<<endl;
-   cout<<"----------------------------------"<<endl;
-   cout<<"alpha: "<<alpha<<endl;
-   cout<<"cl: "<<cl<<endl;
-   cout<<"cd: "<<cd<<endl;
-   cout<<"cdp: "<<cdp<<endl;
-   cout<<"cm: "<<cm<<endl;
-   cout<<"top_xtr: "<<top_xtr<<endl;
-   cout<<"bot_xtr: "<<bot_xtr<<endl;
 }
